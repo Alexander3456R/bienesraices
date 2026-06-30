@@ -13,7 +13,7 @@
     <input type="text" id="telefono" name="vendedor[telefono]" placeholder="Telefono Del Vendedor" value="<?php echo s($vendedor->telefono); ?>">
 
     <label for="email">E-mail: </label>
-    <input type="text" id="email" name="vendedor[email]" placeholder="E-mail Del Vendedor" value="<?php echo s($vendedor->email); ?>">
+    <input type="email" id="email" name="vendedor[email]" placeholder="E-mail Del Vendedor" value="<?php echo s($vendedor->email); ?>">
 
     <label for="imagen">Imagen del vendedor: </label>
                 <input type="file" id="imagen" accept="image/jpeg, image/png" name="vendedor[imagen]">

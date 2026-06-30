@@ -62,11 +62,6 @@ class ActiveRecord {
         $resultado = self::$db->query($query);
         return $resultado;
         
-        if($resultado) {
-            // Redireccionar al usuariooo
-           header('Location: /admin?resultado=2');
-       }
-        
     }
 
     // Eliminar un registro
@@ -124,10 +119,9 @@ class ActiveRecord {
 
     // Elimina el archivo
     public function borrarImagen() {
-        // Comrprobar si existe la imagen
-         $existeArchivo = CARPETA_IMAGENES . $this->imagen;
-        if($existeArchivo) {
-            unlink(CARPETA_IMAGENES . $this->imagen);
+        $archivo = CARPETA_IMAGENES . $this->imagen;
+        if($this->imagen && file_exists($archivo)) {
+            unlink($archivo);
         }
     }
 
@@ -149,7 +143,7 @@ class ActiveRecord {
     // Busca un registro por su id
 
     public static function find($id) {
-          $query = "SELECT * FROM " . static::$tabla . " WHERE id = $id";
+          $query = "SELECT * FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($id);
 
           $resultado = self::consultarSQL($query);
           return array_shift($resultado);

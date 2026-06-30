@@ -44,6 +44,7 @@ class VendedorController {
 
     // Redirigir
     header('Location: /admin?resultado=1');
+    exit;
 }
         }
 
@@ -67,6 +68,11 @@ class VendedorController {
 
         //Obtener datos del vendedor a actualizar
         $vendedor = Vendedor::find($id);
+
+        if(!$vendedor) {
+            header('Location: /admin');
+            exit;
+        }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 

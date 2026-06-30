@@ -33,6 +33,11 @@ class PaginasController {
         // Buscar la propiedad por su ID
         $propiedad = Propiedad::find($id);
 
+        if(!$propiedad) {
+            header('Location: /propiedades');
+            exit;
+        }
+
         $router->render('paginas/propiedad', [
             'propiedad' => $propiedad
         ]);

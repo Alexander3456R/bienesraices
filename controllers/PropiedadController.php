@@ -58,7 +58,7 @@ class PropiedadController {
         }
 
         // Guardar la imagen en el servidor
-        $imagen->save(CARPETA_IMAGENES . $nombreImagen);
+        $imagen->toJpeg(80)->save(CARPETA_IMAGENES . $nombreImagen);
 
         $exito = $propiedad->guardar();
         if($exito) {
@@ -80,6 +80,11 @@ class PropiedadController {
         $id = validarORedireccionar("/admin");
 
         $propiedad = Propiedad::find($id);
+
+        if(!$propiedad) {
+            header('Location: /admin');
+            exit;
+        }
 
         $vendedores = Vendedor::all();
 
@@ -110,7 +115,7 @@ class PropiedadController {
         
             // Almacenar imagen
             if(isset($imagen)) {
-                $imagen->save(CARPETA_IMAGENES . $nombreImagen);
+                $imagen->toJpeg(80)->save(CARPETA_IMAGENES . $nombreImagen);
             }
             $exito = $propiedad->guardar(); 
             if($exito) {
